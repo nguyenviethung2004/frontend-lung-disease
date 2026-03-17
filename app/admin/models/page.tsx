@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 // Mock Data
 const MOCK_MODELS = [
-  { id: "MDL-001", name: "YOLOv8-Medical", type: "Detection", version: "v1.2", created: "2026-03-12", acc: "89.5%", status: "Ready" },
+  { id: "MDL-001", name: "YOLOv8-fvfdbbfgbfgbfgMedical", type: "Detection", version: "v1.2", created: "2026-03-12", acc: "89.5%", status: "Ready" },
   { id: "MDL-002", name: "ResNet-50-Chest", type: "Classification", version: "v2.0", created: "2026-03-15", acc: "94.2%", status: "Ready" },
   { id: "MDL-003", name: "UNet-Brain", type: "Segmentation", version: "v1.0", created: "2026-03-16", acc: "-", status: "Training" },
   { id: "MDL-004", name: "DenseNet-Lungs", type: "Classification", version: "v1.1", created: "2026-03-10", acc: "-", status: "Failed" },
@@ -49,14 +49,14 @@ export default function ModelManagementPage() {
       alert("Vui lòng chọn file Weight (.pt, .pth, .onnx)!");
       return;
     }
-    
+
     setIsUploading(true);
     await new Promise(resolve => setTimeout(resolve, 2000));
 
     showToast("Model weight uploaded successfully!");
     setIsUploading(false);
     setIsUploadOpen(false);
-    
+
     // Reset
     setUploadName("");
     setUploadType("Classification");
@@ -92,7 +92,7 @@ export default function ModelManagementPage() {
           <h1 className="text-2xl font-bold text-gray-900">Model Management</h1>
           <p className="text-sm text-gray-500 mt-1">Quản lý các mô hình AI, weights và version</p>
         </div>
-        <button 
+        <button
           onClick={() => setIsUploadOpen(true)}
           className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium text-sm transition-colors shadow-sm flex items-center gap-2 max-w-max"
         >
@@ -103,9 +103,9 @@ export default function ModelManagementPage() {
 
       {/* Filters and Search */}
       <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
-        <select 
-          value={filterType} 
-          onChange={(e) => {setFilterType(e.target.value); setCurrentPage(1);}}
+        <select
+          value={filterType}
+          onChange={(e) => { setFilterType(e.target.value); setCurrentPage(1); }}
           className="w-full sm:w-auto border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500 outline-none bg-white min-w-[150px]"
         >
           <option value="All">All Types</option>
@@ -115,12 +115,12 @@ export default function ModelManagementPage() {
         </select>
 
         <div className="relative w-full sm:w-80">
-          <input 
-            type="text" 
-            className="block w-full p-2 pl-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500 outline-none transition-all" 
-            placeholder="Search model name..." 
+          <input
+            type="text"
+            className="block w-full p-2 pl-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+            placeholder="Search model name..."
             value={searchTerm}
-            onChange={(e) => {setSearchTerm(e.target.value); setCurrentPage(1);}}
+            onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
           />
         </div>
       </div>
@@ -143,13 +143,13 @@ export default function ModelManagementPage() {
             <tbody className="divide-y divide-gray-200">
               {paginatedData.length > 0 ? (
                 paginatedData.map((row) => (
-                  <tr 
-                    key={row.id} 
+                  <tr
+                    key={row.id}
                     onClick={() => router.push(`/admin/models/${row.id}`)}
                     className="bg-white hover:bg-gray-50/80 transition-colors cursor-pointer"
                   >
                     <td className="px-6 py-4 font-medium text-blue-600 hover:text-blue-800 whitespace-nowrap">
-                        {row.id}
+                      {row.id}
                     </td>
                     <td className="px-6 py-4 font-semibold text-gray-800">{row.name}</td>
                     <td className="px-6 py-4">
@@ -173,20 +173,20 @@ export default function ModelManagementPage() {
             </tbody>
           </table>
         </div>
-        
+
         {/* Pagination Controls */}
         {totalPages > 0 && (
           <div className="flex items-center justify-between p-4 border-t border-gray-200 bg-gray-50/50 text-sm text-gray-600">
             <span>Showing {(currentPage - 1) * itemsPerPage + 1} to {Math.min(currentPage * itemsPerPage, filteredData.length)} of {filteredData.length}</span>
             <div className="inline-flex space-x-2">
-              <button 
+              <button
                 onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
                 className="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 disabled:opacity-50 transition-all"
               >
                 Previous
               </button>
-              <button 
+              <button
                 onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                 disabled={currentPage === totalPages}
                 className="px-3 py-1.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 disabled:opacity-50 transition-all"
@@ -208,23 +208,23 @@ export default function ModelManagementPage() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
               </button>
             </div>
-            
+
             <form onSubmit={handleUploadSubmit} className="p-6 space-y-4">
               <div className="space-y-1">
                 <label className="text-sm font-medium text-gray-700">Model Name <span className="text-red-500">*</span></label>
-                <input 
-                  type="text" 
-                  value={uploadName} 
+                <input
+                  type="text"
+                  value={uploadName}
                   onChange={e => setUploadName(e.target.value)}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500 outline-none" 
+                  className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500 outline-none"
                   placeholder="Ex: YOLOv8-v2-Custom"
-                  required 
+                  required
                 />
               </div>
 
               <div className="space-y-1">
                 <label className="text-sm font-medium text-gray-700">Arch Type <span className="text-red-500">*</span></label>
-                <select 
+                <select
                   value={uploadType}
                   onChange={e => setUploadType(e.target.value)}
                   className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-blue-500 focus:border-blue-500 outline-none"
@@ -243,7 +243,7 @@ export default function ModelManagementPage() {
                     <p className="text-xs text-gray-500">Max size: 500MB</p>
                     {uploadFile && <p className="text-xs font-semibold text-blue-600 pt-2">{uploadFile.name}</p>}
                   </div>
-                  <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" accept=".pt,.pth,.onnx" onChange={e => { if(e.target.files) setUploadFile(e.target.files[0]) }} required={!uploadFile} />
+                  <input type="file" className="absolute inset-0 opacity-0 cursor-pointer" accept=".pt,.pth,.onnx" onChange={e => { if (e.target.files) setUploadFile(e.target.files[0]) }} required={!uploadFile} />
                 </div>
               </div>
 
