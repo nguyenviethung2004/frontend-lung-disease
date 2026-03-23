@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 // Mock Data
 const MOCK_MODELS = [
   { id: "MDL-001", name: "YOLOv8-fvfdbbfgbfgbfgMedical", type: "Detection", version: "v1.2", created: "2026-03-12", acc: "89.5%", status: "Ready" },
-  { id: "MDL-002", name: "ResNet-50-Chest", type: "Classification", version: "v2.0", created: "2026-03-15", acc: "94.2%", status: "Ready" },
+  { id: "MDL-002", name: "ResNetgfhbfrthrthrthrhrhtrhrt-50-Chest", type: "Classification", version: "v2.0", created: "2026-03-15", acc: "94.2%", status: "Ready" },
   { id: "MDL-003", name: "UNet-Brain", type: "Segmentation", version: "v1.0", created: "2026-03-16", acc: "-", status: "Training" },
   { id: "MDL-004", name: "DenseNet-Lungs", type: "Classification", version: "v1.1", created: "2026-03-10", acc: "-", status: "Failed" },
 ];
